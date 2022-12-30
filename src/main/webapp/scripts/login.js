@@ -49,7 +49,11 @@ function checkLogin(){
 				});
 			}
 		}
-
+function unload(){
+	delCookie("uid");
+	delCookie("uname");
+	location.href="log_in.html"
+}
 //注册处理
 function registUser(){
 	//获取请求参数

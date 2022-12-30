@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface BookDAO {
     public List<Book> findBookByUID(String uid);
+    public void addBook(Book book);
 }

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface BookService {
     public NoteResult<List<Book>> loadBooks(String uid);
+    public NoteResult<Book> addBook(String bookName,String userId);
 }

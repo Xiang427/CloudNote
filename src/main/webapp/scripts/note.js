@@ -9,6 +9,7 @@ function loadBookNotes() {
 	$(this).find("a").addClass("checked");
 	// 获取请求参数
 	var bookId = $(this).data("bookId"); // this指代li，是DOM对象，加$()转成jQuery
+	addCookie("bookId",bookId,2);
 	// 发送Ajax请求
 	$.ajax({
 				url : base_path + "/note/loadnotes.do",
@@ -61,10 +62,35 @@ function loadBookNotes() {
 			});
 }
 
+function addNote(){
+	var bookId = getCookie("bookId");
+	var userId = getCookie("uid");
+	// console.log(bookId);
+	var noteTitle =$("#input_note").val();
+	$.ajax({
+		url:base_path+"/note/addNote.do",
+		async:false,
+		type:"post",
+		data:{"noteTitle":noteTitle,"bookId":bookId,"userId":userId},
+		dataType:"json",
+		success:function (result){
+			if (result.status==0){
+				location.reload();
+			}else if (result.status==1){
+				alert(result.msg);
+			}
+		},
+		error:function (){
+			alert("笔记本添加异常");
+		}
+	})
+}
+
 //根据笔记ID加载笔记信息
 function loadNote(){
 	//获取请求参数
 	var noteId = $(this).data("noteId");
+	addCookie("noteId",noteId,2);
 	//发送Ajax请求
 	$.ajax({
 		url:base_path+"/note/load.do",
@@ -84,4 +110,21 @@ function loadNote(){
 			alert("加载笔记异常");
 		}
 	});
+}
+function updateNote(){
+	var noteBody = $("#myEditor").val();
+	var noteTitle = um.getContent();
+	var noteId=getCookie("noteId");
+	$.ajax({
+		url:base_path+"/note/updateNote.do",
+		type:"post",
+		data:{"noteId":noteId,"noteBody":noteBody,"noteTitle":noteTitle},
+		dataType:"json",
+		success:function (){
+			location.reload();
+		},
+		error:function (){
+			alert("修改笔记异常");
+		}
+	})
 }

@@ -2,7 +2,7 @@
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="closeAlertWindow()">×</button>
 								<h4 class="modal-title" id="modalBasicLabel_2">新建笔记</h4>
 							</div>
 							<div class="modal-body">
@@ -14,8 +14,8 @@
                                 </div>
 							</div>
 							<div class="modal-footer" style='margin-top:20px;'>
-								<button type="button" class="btn btn-default cancle" data-dismiss="modal">取 消</button>
-								<button type="button" class="btn btn-primary sure">创 建</button>
+								<button type="button" class="btn btn-default cancle" data-dismiss="modal" onclick="closeAlertWindow()">取 消</button>
+								<button type="button" class="btn btn-primary sure" onclick="addNote()">创 建</button>
 							</div>
 						</div>
 					</div>

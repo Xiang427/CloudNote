@@ -20,10 +20,10 @@ function alertRenameBookWindow(){
 };
 
 //弹出创建笔记对话框
-function alertAddNoteWindow(){
-	$("#can").load("alert/alert_note.html");
-	$(".opacity_bg").show();
-}
+// function alertAddNoteWindow(){
+// 	$("#can").load("alert/alert_note.html");
+// 	$(".opacity_bg").show();
+// }
 
 //弹出创建笔记对话框
 function alertAddNoteWindow(){

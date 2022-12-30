@@ -1,6 +1,7 @@
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import web.dao.BookDAO;
 import web.dao.NoteDAO;
 import web.dao.UserDAO;
 import web.entity.Book;
@@ -11,6 +12,8 @@ import web.service.NoteService;
 import web.service.UserService;
 import web.util.NoteResult;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -77,5 +80,22 @@ public class TestCode {
         NoteService noteService = context.getBean("noteService", NoteService.class);
         NoteResult<Note> noteResult=noteService.load("fed920a0-573c-46c8-ae4e-368397846efd");
         System.out.println(noteResult.toString());
+    }
+    @Test
+    public void test8(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/spring-mybatis.xml");
+        BookDAO bookDAO=context.getBean("bookDAO", BookDAO.class);
+        Book book = new Book();
+        book.setCn_notebook_id("666");
+        book.setCn_notebook_name("666");
+        book.setCn_user_id("03590914-a934-4da9-ba4d-b41799f917d1");
+        book.setCn_notebook_createtime(new Timestamp(new Date().getTime()));
+        bookDAO.addBook(book);
+    }
+    @Test
+    public void test9(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/spring-*.xml");
+        BookService bookService = context.getBean("bookService", BookService.class);
+        bookService.addBook("666","03590914-a934-4da9-ba4d-b41799f917d1");
     }
 }

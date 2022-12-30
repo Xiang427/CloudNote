@@ -8,4 +8,6 @@ import java.util.Map;
 public interface NoteDAO {
     public List<Map> findNotesById(String bookId);
     public Note findNoteById(String noteId);
+    public void addNote(Note note);
+    public void updateNote(Note note);
 }

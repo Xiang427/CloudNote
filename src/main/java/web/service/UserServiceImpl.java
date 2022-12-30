@@ -39,6 +39,25 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public NoteResult<User> updatePwd(String newPwd, String userId) {
+        User user=new User();
+        String md5Password = null;
+        try {
+            md5Password = NoteUtil.md5(newPwd);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        user.setCn_user_password(md5Password);
+        user.setCn_user_id(userId);
+        userDAO.updatePwd(user);
+        NoteResult<User> noteResult=new NoteResult<>();
+        noteResult.setData(user);
+        noteResult.setStatus(0);
+        noteResult.setMsg("修改密码成功！！");
+        return noteResult;
+    }
+
+    @Override
     public NoteResult addUser(String name, String password, String nick) {
         NoteResult<User> noteResult = new NoteResult<>();
         String md5Password = null;
@@ -52,7 +71,6 @@ public class UserServiceImpl implements UserService{
             User user = new User();
             md5Password = NoteUtil.md5(password);
             String id = NoteUtil.createId();
-            System.out.println(id);
             user.setCn_user_id(id);
             user.setCn_user_name(name);
             user.setCn_user_nick(nick);

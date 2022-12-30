@@ -44,3 +44,24 @@ function loadUserBooks(){
 		});
 	}
 }
+function addUserBooks(){
+	var userId = getCookie("uid");
+	var bookName =$("#input_notebook").val();
+	$.ajax({
+		url:base_path+"/book/addBook.do",
+		async:false,
+		type:"post",
+		data:{"bookName":bookName,"userId":userId},
+		dataType:"json",
+		success:function (result){
+			if (result.status==0){
+				location.reload();
+			}else if (result.status==1){
+				alert(result.msg);
+			}
+		},
+		error:function (){
+			alert("笔记本添加异常");
+		}
+	})
+}
