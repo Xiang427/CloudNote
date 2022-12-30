@@ -8,4 +8,7 @@
     <insert id="save" parameterType="web.entity.User">
         insert into cn_user (cn_user_id,cn_user_name,cn_user_password,cn_user_nick) values (#{cn_user_id},#{cn_user_name},#{cn_user_password},#{cn_user_nick})
     </insert>
+    <update id="updatePwd" parameterType="web.entity.User">
+        update cn_user set cn_user_password=#{cn_user_password} where cn_user_id=#{cn_user_id}
+    </update>
 </mapper>
