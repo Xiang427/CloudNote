@@ -20,7 +20,6 @@ public class NoteLoadController {
     @RequestMapping("/loadnotes.do")
     @ResponseBody
     public NoteResult<List<Map>> lodeNotes(String bookId){
-        System.out.println(bookId);
         NoteResult<List<Map>> noteResult=noteService.loadNotes(bookId);
         return noteResult;
     }
@@ -28,7 +27,6 @@ public class NoteLoadController {
     @RequestMapping("/load.do")
     @ResponseBody
     public NoteResult<Note> load(String noteId){
-        System.out.println(noteId);
         NoteResult<Note> noteResult = noteService.load(noteId);
         return noteResult;
     }

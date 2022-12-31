@@ -70,8 +70,13 @@ public class TestCode {
     public void test6(){
         ApplicationContext context = new ClassPathXmlApplicationContext("config/spring-mybatis.xml");
         NoteDAO noteDAO=context.getBean("noteDAO", NoteDAO.class);
-        Note note=noteDAO.findNoteById("fed920a0-573c-46c8-ae4e-368397846efd");
-        System.out.println(note.toString());
+        Note note = new Note();
+        note.setCn_note_id("71cac8ed68834ce083916cb690811126");
+        note.setCn_note_title("666");
+        note.setCn_note_body("5654");
+        note.setCn_note_last_modify_time(new Date().getTime());
+        int i = noteDAO.updateNote(note);
+        System.out.println(i);
     }
 
     @Test
@@ -97,5 +102,12 @@ public class TestCode {
         ApplicationContext context = new ClassPathXmlApplicationContext("config/spring-*.xml");
         BookService bookService = context.getBean("bookService", BookService.class);
         bookService.addBook("666","03590914-a934-4da9-ba4d-b41799f917d1");
+    }
+    @Test
+    public void test10(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("config/spring-*.xml");
+        NoteService noteService = context.getBean("noteService", NoteService.class);
+        NoteResult<Note> noteResult=noteService.updateNote("71cac8ed68834ce083916cb690811126","666","666");
+        System.out.println(noteResult.toString());
     }
 }

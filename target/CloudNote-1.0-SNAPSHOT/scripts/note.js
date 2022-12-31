@@ -9,7 +9,7 @@ function loadBookNotes() {
 	$(this).find("a").addClass("checked");
 	// 获取请求参数
 	var bookId = $(this).data("bookId"); // this指代li，是DOM对象，加$()转成jQuery
-	addCookie("bookId",bookId,2);
+	addCookie("bookId",bookId,24);
 	// 发送Ajax请求
 	$.ajax({
 				url : base_path + "/note/loadnotes.do",
@@ -44,9 +44,9 @@ function loadBookNotes() {
 									+ '</a>'
 									+ '<div class="note_menu" tabindex="-1">'
 									+ '	<dl>'
-									+ '	<dt><button type="button" class="btn btn-default btn-xs btn_move" title="移动至..."><i class="fa fa-random"></i></button></dt>'
-									+ '		<dt><button type="button" class="btn btn-default btn-xs btn_share" title="分享"><i class="fa fa-sitemap"></i></button></dt>'
-									+ '		<dt><button type="button" class="btn btn-default btn-xs btn_delete" title="删除"><i class="fa fa-times"></i></button></dt>'
+									+ '	<dt><button type="button" class="btn btn-default btn-xs btn_move" title="移动至..." onclick="alertMoveNoteWindow()"><i class="fa fa-random"></i></button></dt>'
+									+ '		<dt><button type="button" class="btn btn-default btn-xs btn_share" title="分享" ><i class="fa fa-sitemap"></i></button></dt>'
+									+ '		<dt><button type="button" class="btn btn-default btn-xs btn_delete" title="删除" onclick="alertDeleteNoteWindow()"><i class="fa fa-times"></i></button></dt>'
 									+ '	</dl>' + '</div>' + '</li>';
 							// 将noteId绑定到li元素上
 							var $li = $(sli);
@@ -90,6 +90,7 @@ function addNote(){
 function loadNote(){
 	//获取请求参数
 	var noteId = $(this).data("noteId");
+	addCookie("noteId",noteId,24);
 	//发送Ajax请求
 	$.ajax({
 		url:base_path+"/note/load.do",
@@ -110,7 +111,44 @@ function loadNote(){
 		}
 	});
 }
-function updateNote(){
-	var noteBody = $("#myEditor").val();
-	var noteTitle = $("#input_note_title").val();
+function deleteNote(){
+	var noteId = getCookie("noteId");
+	$.ajax({
+		url:base_path+"/note/deleteNote.do",
+		type:"post",
+		data:{"noteId":noteId},
+		dataType:"json",
+		success:function(result){
+			if(result.status == 0){
+				alert(result.msg);
+				location.reload();
+			}else {
+				alert(result.msg);
+			}
+		},
+		error:function(){
+			alert("笔记删除失败");
+		}
+	});
+}
+function moveNote(){
+	var bookId = $("#moveSelect").val();
+	var noteId = getCookie("noteId");
+	$.ajax({
+		url:base_path+"/note/moveNote.do",
+		type:"post",
+		data:{"noteId":noteId,"bookId":bookId},
+		dataType:"json",
+		success:function(result){
+			if(result.status == 0){
+				alert(result.msg);
+				location.reload();
+			}else {
+				alert(result.msg);
+			}
+		},
+		error:function(){
+			alert("笔记移动失败");
+		}
+	});
 }

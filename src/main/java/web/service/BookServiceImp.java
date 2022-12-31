@@ -21,8 +21,6 @@ public class BookServiceImp implements BookService{
         Timestamp timestamp = new Timestamp(new Date().getTime());
         String id = NoteUtil.createId();
         NoteResult<Book> noteResult = new NoteResult<>();
-        System.out.println(bookName);
-        System.out.println("*************");
         if (bookName==null || bookName.equals("")){
             noteResult.setStatus(1);
             noteResult.setMsg("笔记本创建失败！笔记本名称为空！！");

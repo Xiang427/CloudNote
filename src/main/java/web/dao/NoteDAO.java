@@ -9,5 +9,7 @@ public interface NoteDAO {
     public List<Map> findNotesById(String bookId);
     public Note findNoteById(String noteId);
     public void addNote(Note note);
-    public void updateNote(Note note);
+    public int updateNote(Note note);
+    public int moveNote(Note note);
+    public int deleteNote(String noteId);
 }

@@ -52,7 +52,7 @@ function checkLogin(){
 function unload(){
 	delCookie("uid");
 	delCookie("uname");
-	location.href="log_in.html"
+	location.href=base_path+"/log_in.html"
 }
 //×¢²á´¦Àí
 function registUser(){

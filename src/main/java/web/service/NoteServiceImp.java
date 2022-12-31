@@ -32,8 +32,6 @@ public class NoteServiceImp implements NoteService{
     @Override
     public NoteResult<Note> add(String noteTitle, String userId, String bookId) {
         NoteResult<Note> noteResult = new NoteResult<>();
-        System.out.println(noteTitle);
-        System.out.println("*************");
         if (noteTitle==null || noteTitle.equals("")){
             noteResult.setMsg("创建失败，笔记无标题");
             noteResult.setStatus(1);
@@ -71,14 +69,50 @@ public class NoteServiceImp implements NoteService{
     public NoteResult<Note> updateNote(String noteId, String noteBody, String noteTitle) {
         Note note = new Note();
         note.setCn_note_id(noteId);
-        note.setCn_note_body(noteBody);
         note.setCn_note_title(noteTitle);
-        note.setCn_note_last_modify_time(new Date().getTime());
-        noteDAO.updateNote(note);
-        NoteResult<Note> noteResult = new NoteResult<>();
-        noteResult.setData(note);
-        noteResult.setStatus(0);
-        noteResult.setMsg("修改笔记成功");
+        note.setCn_note_body(noteBody);
+        Long time = System.currentTimeMillis();
+        note.setCn_note_last_modify_time(time);
+        int rows = noteDAO.updateNote(note);
+        NoteResult result = new NoteResult();
+        if(rows == 1){    //成功
+            result.setStatus(0);
+            result.setMsg("保存笔记成功");
+            return result;
+        }
+        result.setStatus(1);
+        result.setMsg("保存笔记失败");
+        return result;
+    }
+
+    @Override
+    public NoteResult deleteNote(String noteId) {
+        NoteResult result = new NoteResult();
+        int rows = noteDAO.deleteNote(noteId);
+        if(rows == 1){    //成功
+            result.setStatus(0);
+            result.setMsg("笔记删除成功");
+            return result;
+        }
+        result.setStatus(1);
+        result.setMsg("笔记删除失败");
+        return result;
+    }
+
+    @Override
+    public NoteResult moveNote(String noteId, String bookId) {
+        NoteResult noteResult = new NoteResult();
+        Note note =new Note();
+        note.setCn_note_id(noteId);
+        note.setCn_notebook_id(bookId);
+        int rows = noteDAO.moveNote(note);
+        if (rows==1){
+            noteResult.setStatus(0);
+            noteResult.setMsg("移动笔记成功");
+            return noteResult;
+        }
+        noteResult.setStatus(1);
+        noteResult.setMsg("移动笔记失败");
         return noteResult;
     }
 }

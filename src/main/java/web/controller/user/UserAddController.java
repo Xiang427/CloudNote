@@ -18,7 +18,6 @@ public class UserAddController {
     @RequestMapping("/add.do")
     @ResponseBody
     public NoteResult<User> add(String name,String password ,String nick){
-        System.out.println(name+"----"+password+"----"+nick);
         NoteResult<User> noteResult = userService.addUser(name,password,nick);
         return noteResult;
     }

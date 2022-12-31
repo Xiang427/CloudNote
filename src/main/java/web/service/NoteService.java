@@ -11,4 +11,6 @@ public interface NoteService {
     public NoteResult<Note> load(String noteId);
     public NoteResult<Note> add(String noteTitle,String userId,String bookId);
     public NoteResult<Note> updateNote(String noteId,String noteBody,String noteTitle);
+    public NoteResult deleteNote(String noteId);
+    public NoteResult moveNote(String noteId,String bookId);
 }

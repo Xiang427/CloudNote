@@ -22,10 +22,15 @@
 		<script type="text/javascript" src="scripts/basevalue.js"></script>
 		<script type="text/javascript" src="scripts/cookie_util.js"></script>
 		<script type="text/javascript" src="scripts/alert.js"></script>
+		<script type="text/javascript" src="scripts/login.js"></script>
 		<script type="text/javascript" src="scripts/book.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="scripts/note.js" charset="UTF-8"></script>
 		<script type="text/javascript" charset="UTF-8">
 			$(function(){    //页面载入完毕后
+				$("#note_ul").on("click",".btn_slide_down",function (){
+					var note_menu=$(this).parents("li").find("div");
+					note_menu.slideToggle(1000);
+				})
 				//1.加载用户笔记本列表
 				loadUserBooks();
 				//2.给笔记本li绑定单击处理（动态绑定），通过程序动态载入的元素的绑定
@@ -53,7 +58,7 @@
 					}else{
 						//发送Ajax请求
 						$.ajax({
-							url:base_path+"/note/update.do",
+							url:base_path+"/note/updateNote.do",
 							type:"post",
 							data:{"noteId":noteId,"title":title,"body":body},
 							dataType:"json",
@@ -237,7 +242,7 @@
 							<h3>编辑笔记</h3>
 						</div>
 						<div class="col-xs-3">
-							<button type="button" class="btn btn-block btn-sm btn-primary" id='save_note'>保存笔记</button>
+							<button type="button" class="btn btn-block btn-sm btn-primary" id='save_note' >保存笔记</button>
 						</div>
 					</div>
 				</div>

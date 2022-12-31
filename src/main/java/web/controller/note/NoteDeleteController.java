@@ -1,5 +1,6 @@
 package web.controller.note;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,15 +11,15 @@ import web.util.NoteResult;
 import javax.annotation.Resource;
 
 @Controller
-@ResponseBody
 @RequestMapping("/note")
-public class NoteUpdateController {
-    @Resource
+public class NoteDeleteController {
+    @Resource(name = "noteService")
     NoteService noteService;
 
-    @RequestMapping("/updateNote.do")
-    public NoteResult<Note> update(String noteId,String body,String title){
-        NoteResult<Note> noteResult=noteService.updateNote(noteId,body,title);
+    @ResponseBody
+    @RequestMapping("/deleteNote.do")
+    public NoteResult delete(String noteId){
+        NoteResult noteResult = noteService.deleteNote(noteId);
         return noteResult;
     }
 }
