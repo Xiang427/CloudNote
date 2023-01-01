@@ -2,7 +2,26 @@
 
 #### 介绍
 云笔记
+#项目概述
+用户模块：登录、注册、退出、修改密码；
+笔记本模块：笔记本创建、删除、更新、查看；
+笔记模块：笔记创建、删除、更新、查看、转移；
 
+#设计思想
+表现层：HTML+CSS+JQ+AJAX
+控制层：springMVC
+业务层：Service
+持久层：DAO
+
+#技术架构
+1、开发环境：IDEA+Tomcat+MySQL
+2、技术支持：JAVA+jQuery+AJAX+SpringMVC
+		  IOC+AOP+MyBatis
+#整体规范
+所有的请求采用ajax方式访问
+前端页面采用HTML
+对所有的请求结果进行JSON响应
+	{"status":	,"msg":	,"data":	}
 #### 软件架构
 软件架构说明
 
